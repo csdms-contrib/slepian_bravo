@@ -8,10 +8,10 @@ function varargout=plm2slep(lmcosi,TH,L,phi,theta,omega,nosort,J)
 % INPUT:
 %
 % lmcosi     Standard-type real spherical harmonic expansion coefficients
-% TH         Radius of the concentration region (degrees) OR
-%            'england', 'eurasia',  'namerica', 'australia', 'greenland'
+% TH         Radius of the concentration region (degrees)
+%            OR: 'england', 'eurasia',  'namerica', 'australia', 'greenland'
 %            'africa', 'samerica', 'amazon', 'orinoco', in which case 
-%            you must have phi,theta,omega all equal to zero
+%            you must have phi,theta,omega all equal to zero 
 %            OR: {'region' buf} where buf is the distance in degrees that
 %            the region outline will be enlarged by BUFFERM
 %            OR: [lon lat] an ordered list defining a closed curve [degrees]
@@ -21,7 +21,7 @@ function varargout=plm2slep(lmcosi,TH,L,phi,theta,omega,nosort,J)
 % omega      Anticlockwise azimuthal rotation of the tapers (degrees)
 % nosort     0 Will sort the output according to the global eigenvalue [default]
 %            1 Will not sort thus the "block" sorting is preserved
-% J          Number of largest eigenfunctions in which to expand [default: N]
+% J          Number of largest eigenfunctions in which to expand [default: (L+1)^2]
 %
 % OUTPUT:
 %
@@ -40,8 +40,8 @@ function varargout=plm2slep(lmcosi,TH,L,phi,theta,omega,nosort,J)
 %
 % See also: PTOSLEP, GLMALPHA, GLMALPHAPTO, SLEP2PLM
 %
-% Last modified by fjsimons-at-alum.mit.edu, 06/26/2012
-% With thanks to input from charig-at-princeton.edu, 06/26/2012
+% Last modified by charig-at-princeton.edu, 4/24/2013
+% Last modified by fjsimons-at-alum.mit.edu, 6/26/2012
 
 if ~isstr(lmcosi)
   % Supply defaults
@@ -52,6 +52,14 @@ if ~isstr(lmcosi)
   defval('omega',0)
   defval('nosort',0)
   
+  % Figure out if it's lowpass or bandpass
+  lp=length(L)==1;
+  bp=length(L)==2;
+  maxL=max(L);
+  % The spherical harmonic dimension
+  ldim=(L(2-lp)+1)^2-bp*L(1)^2;
+  defval('J',ldim)
+  
   if lmcosi(1)~=0 || lmcosi(2)~=1
     error('Spherical harmonics must start from degree zero')
   end
@@ -60,7 +68,7 @@ if ~isstr(lmcosi)
   if phi==0 && theta==0 && omega==0
     % Get the Slepian basis; definitely not block-sorted as for the rotated
     % versions this will make no sense at all anymore
-    defval('J',round((L+1)^2*spharea(TH)))
+    % Glmalpha can handle a string, cell, or coordinates as TH, so this is ok
     [G,V,EL,EM,N,GM2AL,MTAP,IMTAP]=glmalpha(TH,L,[],0,[],[],J);
   else
     % Need to get a complete GLMALPHA but for the rotated basis
@@ -80,13 +88,19 @@ if ~isstr(lmcosi)
   end
 
   % Get the mapping from LMCOSI into not-block-sorted GLMALPHA
-  [~,~,~,~,~,~,~,~,~,ronm]=addmon(L);
+  [~,~,~,~,~,~,~,~,~,ronm]=addmon(maxL);
   
   % Make sure that the requested L acts as truncation on lmcosi
-  lmcosi=lmcosi(1:addmup(L),:);
-
+  % or if we don't have enough, pad with zeros
+  if size(lmcosi,1) < addmup(maxL)
+      [~,~,~,lmcosipad]=addmon(maxL);
+      lmcosi = [lmcosi; lmcosipad(size(lmcosi,1)+1:end,:)];
+  else
+      lmcosi=lmcosi(1:addmup(maxL),:);
+  end
+  
   % Perform the expansion of the signal into the Slepian basis
-  falpha=G'*lmcosi(2*size(lmcosi,1)+ronm(1:(L+1)^2));
+  falpha=G'*lmcosi(2*size(lmcosi,1)+ronm(1:(maxL+1)^2));
 
   % Collect output
   varns={falpha,V,N,MTAP,G};
@@ -251,10 +265,14 @@ elseif strcmp(lmcosi,'demo3')
   % After this you would simply be doing the PLM2ROT analysis of the
   % first few coefficients
 
-  %   The coordinates for the SPA deselection we chose to be a center of
-  %   -55 deg. lat and 10 deg. lon for a map centered on the farside with a
-  %   radius of 1000 km. There is flexibility though in this choice. The
-  %   SPA deselection should happen on 'global' fits as well as farside
-  %   hemisphere-only fits. The third fit type is nearside hemisphere
-  %   only. 
+  
+%   The coordinates for the SPA deselection we chose to be a center of -55 
+% deg. lat and 10 deg. lon for a map centered on the farside with a radius 
+% of 1000 km. There is flexibility though in this choice. The SPA 
+% deselection should happen on 'global' fits as well as farside 
+% hemisphere-only fits. The third fit type is nearside hemisphere only.
 end
+
+
+
+

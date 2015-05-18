@@ -49,6 +49,7 @@ function varargout=...
 % PLM2SLEP, XYZ2SPL, XYZ2PLM
 %
 % Last modified by fjsimons-at-alum.mit.edu, 01/17/2010
+% Last modified by charig-at-princeton.edu, 05/14/2015
 
 % Later: modify to do double cap nonrotated, and compliment
 
@@ -147,6 +148,7 @@ elseif strcmp(fthph,'demo1')
   defval('theta',[])
   defval('Nd',theta);
   defval('Nd',300)
+  defval('omega',0);
   theta=[];
   % What if the input is a single sampled Slepian function?
   TH=15;
