@@ -6,5 +6,3 @@ which you may cite if you find any of these routines useful!
 
 ## Latest official release
 [![DOI](https://zenodo.org/badge/6548/csdms-contrib/slepian_bravo.svg)](https://zenodo.org/badge/latestdoi/6548/csdms-contrib/slepian_bravo)
-
-
