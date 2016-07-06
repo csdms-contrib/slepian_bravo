@@ -1,6 +1,10 @@
 # slepian_bravo
+Linear inversion problems using Slepian functions as developed by
+<a href="http://geoweb.princeton.edu/people/simons/Simons+2006-GJI.html">Simons &amp; Dahlen</a><br>
+Geophys. J. Int., 166 (3), 1039–1061, 2006, <a href="10.1111/j.1365-246X.2006.03065.x">doi: 10.1111/j.1365-246X.2006.03065.x</a><br>
+which you may cite if you find any of these routines useful! 
 
-##Obtain first release
-The first release, 1.0.0, is deposited in Zenodo (http://dx.doi.org/10.5281/zenodo.15705).
+## Latest official release
+[![DOI](https://zenodo.org/badge/6548/csdms-contrib/slepian_bravo.svg)](https://zenodo.org/badge/latestdoi/6548/csdms-contrib/slepian_bravo)
 
-[![DOI](https://zenodo.org/badge/7664/csdms-contrib/slepian_bravo.svg)](http://dx.doi.org/10.5281/zenodo.15705)
+
