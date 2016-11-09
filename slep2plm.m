@@ -1,9 +1,9 @@
 function varargout=slep2plm(falpha,TH,L,phi,theta,omega)
 % [lmcosi,V,N]=SLEP2PLM(falpha,TH,L,phi,theta,omega)
 %
-% Finds the expansion coefficiens into a SINGLE-CAP, potentially rotated,
-% Slepian basis of a function whose real spherical harmonic expansion
-% coefficients are known.
+% Finds the spherical harmonic expansion coefficients of a function whose
+% Slepian-basis (in terms of a SINGLE-CAP, potentially rotated Slepian
+% basis) expansion coefficients are known.
 %
 % INPUT:
 %
@@ -24,7 +24,7 @@ function varargout=slep2plm(falpha,TH,L,phi,theta,omega)
 %
 % See also: PTOSLEP, GLMALPHA, GLMALPHAPTO
 %
-% Last modified by fjsimons-at-alum.mit.edu, 06/27/2012
+% Last modified by fjsimons-at-alum.mit.edu, 11/09/2016
 
 % Supply defaults
 defval('TH',30)
