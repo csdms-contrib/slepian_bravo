@@ -16,8 +16,9 @@ function lmcosip=plm2mag(lmcosiS,r,a,wat)
 % lmcosip       [l m Ccos Csin] degrees, order, coefficients of output in
 %               the 4pi fully normalized basis good for PLM2XYZ
 %
-% Last modified by fjsimons-at-alum.mit.edu, 07/13/2012
+% Last modified by fjsimons-at-alum.mit.edu, 05/04/2018
 
+% Default values
 defval('a',6371200)
 defval('r',a)
 defval('wat',1)
@@ -27,7 +28,7 @@ el=lmcosiS(:,1);
 arl2=(a/r).^(el+2);
 
 % Convert from Schmidt semi-normalized to 4pi-normalized
-lmcosi(:,3:4)=lmcosiS(:,3:4)./sqrt(2*[el el]+1);
+lmcosiS(:,3:4)=lmcosiS(:,3:4)./sqrt(2*[el el]+1);
 lmcosip=lmcosiS;
 
 % Convert
