@@ -1,5 +1,5 @@
-function lmcosip=plm2mag(lmcosi,r,a,wat,schm)
-% lmcosip=PLM2MAG(lmcosi,r,a,wat,schm)
+function lmcosi=plm2mag(lmcosi,r,a,wat,schm)
+% lmcosi=PLM2MAG(lmcosi,r,a,wat,schm)
 %
 % Converts a (Schmidt-normalized) real-spherical-harmonic array of
 % magnetic-potential cosine and sine coefficients into a same-size
@@ -22,7 +22,7 @@ function lmcosip=plm2mag(lmcosi,r,a,wat,schm)
 %
 % OUPUT:
 %
-% lmcosip       [l m Ccos Csin] degrees, order, cos/sin coefficients of output
+% lmcosi        [l m Ccos Csin] degrees, order, cos/sin coefficients of output
 %
 % Written by by fjsimons-at-alum.mit.edu, 03/05/2009
 % Last modified by Jarno Saarimaki, 07/01/2011
@@ -54,7 +54,7 @@ switch wat
  case 1
   % [Blakely 1995 p. 169 after eq. (8.20)]
   disp('Calculating radial field from potential')
-  lmcosip(:,3:4)=lmcosi(:,3:4).*((el+1)*[1 1]);
+  lmcosi(:,3:4)=lmcosi(:,3:4).*((el+1)*[1 1]);
  case 2
   % Kono 
   disp('Calculating colatitudinal tangential field from potential')
