@@ -32,6 +32,7 @@ function varargout=plm2rnd(L,bta,meth,norma)
 % plm2rnd('demo1') % Verifies input and output
 % plm2rnd('demo2') % Compares EGM96 to random structures
 %
+% Last modified by charig-at-arizona.edu, 09/29/2020
 % Last modified by fjsimons-at-alum.mit.edu, 03/13/2013
 
 defval('bta',-4.0361)
@@ -91,8 +92,10 @@ else
     axes(ah(1))
     plotplm(egm(4:end,:),[],[],1)
     axes(ah(2))
-    dbt=plotplm(egm,[],[],3);
-
+    %dbt=plotplm(egm,[],[],3);
+    egm = [0 0 0 0; 1 0 0 0; 1 1 0 0; egm(:,1:4)];
+    plotplm(egm,[],[],3);
+    
     syn1=plm2rnd(max(egm(:,1)),bta);
     syn2=plm2rnd(max(egm(:,1)),bta);
     
@@ -100,12 +103,12 @@ else
     plotplm(syn1(7:end,:),[],[],1)
     
     axes(ah(4))
-    dbt1=plotplm(syn1(4:end,:),[],[],3);
+    dbt1=plotplm(syn1,[],[],3);
 
     axes(ah(5))
     plotplm(syn2(7:end,:),[],[],1)
     axes(ah(6))
-    dbt2=plotplm(syn1(4:end,:),[],[],3);
+    dbt2=plotplm(syn2,[],[],3);
     figdisp([],'demo2')
   end
 end
