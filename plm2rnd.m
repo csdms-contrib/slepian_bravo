@@ -32,6 +32,7 @@ function varargout=plm2rnd(L,bta,meth,norma)
 % plm2rnd('demo1') % Verifies input and output
 % plm2rnd('demo2') % Compares EGM96 to random structures
 %
+% Small fix by plattner-at-alumni.ethz.ch, 10/04/2021
 % Last modified by charig-at-arizona.edu, 09/29/2020
 % Last modified by fjsimons-at-alum.mit.edu, 03/13/2013
 
@@ -63,7 +64,7 @@ if ~isstr(L)
   % Compute the spectrum defined by plm2spec
   [sdl,el,bto]=plm2spec(lmcosi,norma);
   % Repeat observed spectrum for all m
-  srep=addmin(sdl);
+  srep=addmin(sdl)'; % Alain Oct 2021: Needs to be a column vector
   % Then reassign it into the coefficient matrix after scaling
   lmcosi(:,3)=lmcosi(:,3)./sqrt(srep).*l.^(bta/2);
   lmcosi(:,4)=lmcosi(:,4)./sqrt(srep).*l.^(bta/2);
