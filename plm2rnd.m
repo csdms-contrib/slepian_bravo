@@ -2,7 +2,7 @@ function varargout=plm2rnd(L,bta,meth,norma)
 % [lmcosi,bta,bto,sdl,el]=PLM2RND(L,BTA,meth,norma)
 %
 % Makes a random field up to degree L with a power spectral slope scaled
-% to exactly l^bta. 
+% to exactly l^bta. Watch the treatment of l=0 which may not be to your liking.
 % 
 % INPUT:
 %
@@ -48,18 +48,16 @@ if ~isstr(L)
     disp('Using Gaussian random')
     % One realization for every coefficient
     c=randn(addmup(L),2);
-    % Make sure the sine coefficients are zero
-    c(mzero,2)=0; 
-    % Collect in a proper format
-    lmcosi=[l m c];
    case 2
     disp('Using uniform random')
     c=2*rand(addmup(L),2)-1;
-    c(mzero,2)=0;
-    lmcosi=[l m c]; 
    otherwise
     error('Specify valid method')
   end
+  % Make sure the sine coefficients are zero
+  c(mzero,2)=0; 
+  % Collect in a proper format
+  lmcosi=[l m c];
   
   % Compute the spectrum defined by plm2spec
   [sdl,el,bto]=plm2spec(lmcosi,norma);
@@ -68,10 +66,11 @@ if ~isstr(L)
   % Then reassign it into the coefficient matrix after scaling
   lmcosi(:,3)=lmcosi(:,3)./sqrt(srep).*l.^(bta/2);
   lmcosi(:,4)=lmcosi(:,4)./sqrt(srep).*l.^(bta/2);
-  % Fix the mean to be zero on average
+
+  % The (0,0) coefficient is plus or minus one with a random sign
   lmcosi(1,3)=2*round(rand)-1;
   lmcosi(1,4)=0;
-  
+
   % And then see what you get
   if nargout>=3
     [sdl,el,bto]=plm2spec(lmcosi,norma);
