@@ -85,7 +85,7 @@ elseif strcmp(lmcosi,'demo1')
   [ah,ha]=krijetem(subnum(3,2));
   
   axes(ah(1))
-  [topo,b,c]=plotplm(lmcosi,[],[],4,1); delete([b c])
+  [topo,b,c]=plotplm(lmcosi,[],[],1,1); %delete([b c])
   % Color scale
   col1=getpos(ah(1));
   col1=[col1(1)-col1(3)/10 col1(2) col1(3)/15 col1(4)];
@@ -110,7 +110,7 @@ elseif strcmp(lmcosi,'demo1')
   wot=1;
   % Check the normalization of GLM2LMCOSI
   lmcosit=glm2lmcosi(G,wot);
-  [taper,b,c]=plotplm(lmcosit,[],[],4,1); delete([b c])
+  [taper,b,c]=plotplm(lmcosit,[],[],1,1); %delete([b c])
   
   [st,lt]=plm2spec(lmcosit);
   axes(ah(6))
@@ -125,7 +125,8 @@ elseif strcmp(lmcosi,'demo1')
   
     % Plot examples in the space domain
     axes(ah(3))
-    [~,b,c]=plotplm(topop,[],[],4,1); delete([b c])
+    cla(ah(3))
+    [~,b,c]=plotplm(topop,[],[],1,1); %delete([b c])
     
     [lon2,lat2]=caploc([phi0 90-th0],TH,[]);
     hold on; d=plot(lon2,lat2,'k'); hold off
