@@ -5,7 +5,7 @@ function sdeta2(SN)
 % Plots damping vs variance curves from SDMSE/SDMSE2.
 % For MSE, not its square!
 %
-% Last modified by fjsimons-at-alum.mit.edu, 21.10.2005
+% Last modified by fjsimons-at-alum.mit.edu, 09/23/2023
 
 defval('SN',[4 6 8 10]);
 
