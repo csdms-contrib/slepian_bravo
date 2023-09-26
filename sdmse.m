@@ -3,7 +3,7 @@ function [eta,mseO,mseR,mseC,fO,fR,fC]=sdmse(SN,eta,TH,L,phi)
 %
 % Calculates the colatitudinal mean square error AVERAGED over the 
 % (complementary) region of observation or over the entire sphere
-% calculated by Gauss-Legendre averaging
+% for spherical harmonic expansions, by Gauss-Legendre averaging
 %
 % INPUT:
 %
@@ -24,7 +24,7 @@ function [eta,mseO,mseR,mseC,fO,fR,fC]=sdmse(SN,eta,TH,L,phi)
 % fR       Eta of minimum mean square error over the region 
 % fC       Eta of minimum mean square error over the complementary region 
 %
-% Last modified by fjsimons-at-alum.mit.edu, 04/13/2007
+% Last modified by fjsimons-at-alum.mit.edu, 09/23/2023
 % 
 % See also SDETA, SDMSK, SDMSE2
 
