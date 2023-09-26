@@ -5,7 +5,7 @@ function sdkay(SN)
 %
 % See also SDKAY2
 %
-% Last modified by fjsimons-at-alum.mit.edu, 24.10.2005
+% Last modified by fjsimons-at-alum.mit.edu, 09/23/2023
 
 defval('SN',[4 6 8 10]);
 
