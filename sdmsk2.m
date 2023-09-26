@@ -3,7 +3,7 @@ function [kay,mskO,mskR,mskC,kO,kR,kC,K,varO,bs2O]=sdmsk2(SN,kay,TH,L)
 %
 % Calculates the mean square error AVERAGED over the 
 % (complementary) region of observation or over the entire sphere
-% for truncated Slepian expansions, by hand.
+% for truncated Slepian expansions, by hand, so to speak.
 %
 % INPUT:
 %
@@ -25,7 +25,7 @@ function [kay,mskO,mskR,mskC,kO,kR,kC,K,varO,bs2O]=sdmsk2(SN,kay,TH,L)
 % varO        The variance component of mskO 
 % bs2O        The bias^2 component of mskO 
 %
-% Last modified by fjsimons-at-alum.mit.edu, 04/13/2007
+% Last modified by fjsimons-at-alum.mit.edu, 09/26/2023
 % 
 % See also SDKAY, SDMSE, SDMSK
 
