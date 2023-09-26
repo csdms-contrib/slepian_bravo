@@ -2,7 +2,7 @@ function [K,Al,Dlta,Kp]=abelpoisson(h,Dlta,L)
 % [K,Al,Dlta,Kp]=ABELPOISSON(h,Dlta,L)
 %
 % Calculates the Abel-Poisson kernel and verifies the funky equation
-% producing it --- see the work of Freeden and his posse
+% producing it --- see the work of Freeden and friends..
 %
 % INPUT:
 % 
@@ -20,7 +20,7 @@ function [K,Al,Dlta,Kp]=abelpoisson(h,Dlta,L)
 %
 % [K,Al,Dlta,Kp]=abelpoisson;
 %
-% Last modified by fjsimons-at-alum.mit.edu, 08/06/2007
+% Last modified by fjsimons-at-alum.mit.edu, 09/23/2023
 
 defval('h',0.50)
 defval('L',50)
