@@ -3,7 +3,7 @@ function [eta,mseO,mseR,mseC,fO,fR,fC,varO,bs2O]=sdmse2(SN,eta,TH,L)
 %
 % Calculates the colatitudinal mean square error AVERAGED over the 
 % (complementary) region of observation or over the entire sphere,
-% calculated analytically, not by integration.
+% for spherical-harmonic expansions, analytically, not by integration.
 %
 % INPUT:
 %
@@ -25,7 +25,7 @@ function [eta,mseO,mseR,mseC,fO,fR,fC,varO,bs2O]=sdmse2(SN,eta,TH,L)
 % varO       The variance component of mseO 
 % bs2O       The bias^2 component of mseO 
 %
-% Last modified by fjsimons-at-alum.mit.edu, 04/13/2007
+% Last modified by fjsimons-at-alum.mit.edu, 09/23/2023
 % 
 % See also SDETA, SDMSK, SDMSE
 
