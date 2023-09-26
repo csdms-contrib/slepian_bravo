@@ -5,7 +5,7 @@ function sdkay2(SN)
 % Plots truncation vs variance curves from SDMSK2
 % For mean square error, not its square root, and integration by hand.
 %
-% Last modified by fjsimons-at-alum.mit.edu, 09.02.2006
+% Last modified by fjsimons-at-alum.mit.edu, 09/23/2023
 
 defval('SN',[4 6 8 10]);
 
