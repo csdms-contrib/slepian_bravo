@@ -41,7 +41,7 @@ function varargout=plm2slep(lmcosi,TH,L,phi,theta,omega,nosort,J)
 % See also: PTOSLEP, GLMALPHA, GLMALPHAPTO, SLEP2PLM
 %
 % Last modified by charig-at-princeton.edu, 4/24/2013
-% Last modified by fjsimons-at-alum.mit.edu, 6/26/2012
+% Last modified by fjsimons-at-alum.mit.edu, 9/26/2023
 
 if ~isstr(lmcosi)
   % Supply defaults
@@ -146,7 +146,7 @@ elseif strcmp(lmcosi,'demo3')
   strin=lmcosi;
   % Do something for the Moon, quickly, from my own files
   lmcosi=fralmanac('GLTM2B','SHM'); 
-  L=lmcosi(end,1); L=21
+  L=lmcosi(end,1);
   % Figure windows
   clf
   [ah,ha]=krijetem(subnum(2,2));
@@ -200,6 +200,7 @@ elseif strcmp(lmcosi,'demo3')
   
   % Perform the expansion of the signal into the Slepian basis
   lmcosiJ=lmcosi; lmcosiJ(:,3:4)=0;
+  % And then re-expand that into the spherical harmonic basis 
   lmcosiJ(stix)=G*G'*lmcosi(stix);
 
   % Note that it is instructive to look at G*G' to see how the degrees
@@ -265,12 +266,11 @@ elseif strcmp(lmcosi,'demo3')
   % After this you would simply be doing the PLM2ROT analysis of the
   % first few coefficients
 
-  
-%   The coordinates for the SPA deselection we chose to be a center of -55 
-% deg. lat and 10 deg. lon for a map centered on the farside with a radius 
-% of 1000 km. There is flexibility though in this choice. The SPA 
-% deselection should happen on 'global' fits as well as farside 
-% hemisphere-only fits. The third fit type is nearside hemisphere only.
+  % The coordinates for the SPA deselection we chose to be a center of -55
+  % deg. lat and 10 deg. lon for a map centered on the farside with a radius
+  % of 1000 km. There is flexibility though in this choice. The SPA
+  % deselection should happen on 'global' fits as well as farside
+  % hemisphere-only fits. The third fit type is nearside hemisphere only.
 end
 
 
