@@ -1,7 +1,7 @@
 function [kay,mskO,mskR,mskC,kO,kR,kC,K]=sdmsk(SN,kay,TH,L,phi)
 % [kay,mskO,mskR,mskC,kO,kR,kC,K]=sdmsk(SN,kay,TH,L,phi)
 %
-% Calculates the mean square error AVERAGED over the 
+% Calculates the mean-squared error AVERAGED over the 
 % (complementary) region of observation or over the entire sphere
 % for truncated Slepian expansions, by Gauss-Legendre averaging
 %
@@ -24,7 +24,7 @@ function [kay,mskO,mskR,mskC,kO,kR,kC,K]=sdmsk(SN,kay,TH,L,phi)
 % kC          Kay of minimum mean square error over the complementary region 
 % K           Shannon number of this problem
 %
-% Last modified by fjsimons-at-alum.mit.edu, 04/13/2007
+% Last modified by fjsimons-at-alum.mit.edu, 09/26/2023
 % 
 % See also SDKAY, SDMSE
 
