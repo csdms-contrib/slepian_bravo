@@ -1,7 +1,9 @@
 function B=sdbias(S,eta,Vo)
 % B=sdbias(S,eta,Vo)
 %
-% Calculates the BIAS MATRIX for geodetic inversions
+% Calculates the BIAS MATRIX for geodetic spherical-harmonics and
+% Slepian-function inversions following
+% Simons and Dahlen (2006)
 %
 % INPUT:
 %
@@ -15,7 +17,7 @@ function B=sdbias(S,eta,Vo)
 % B           (L+1)^2 X (L+1)^2 matrix with bias terms
 %                 K   X    K    matrix in the Slepian case
 %
-% Last modified by fjsimons-at-alum.mit.edu, 04/13/2007
+% Last modified by fjsimons-at-alum.mit.edu, 09/27/2023
 
 defval('S',1)
 defval('eta',1)
@@ -31,6 +33,3 @@ else
   % Truncated Slepian function approach
   B=S*eye(size(diag(Vo)));
 end
-
-
-
