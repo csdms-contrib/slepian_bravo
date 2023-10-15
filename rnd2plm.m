@@ -24,11 +24,11 @@ function varargout=rnd2plm(lmcosi,meth)
 %
 % EXAMPLE: 
 %
-% RND2PLM('demo1') produces realizations of fields with the same
-% statistics as lunar topography
+% rnd2plm('demo1')
+% produces realizations of fields with the same statistics as lunar topography
 %
 % Written by Kevin Lewis, 02/21/2010
-% Last modified by fjsimons-at-alum.mit.edu, 07/06/2012
+% Last modified by fjsimons-at-alum.mit.edu, 10/15/2023
 
 if ~isstr(lmcosi)
   % Supply the default, i.e. a low-resolution terrestrial gravity field
