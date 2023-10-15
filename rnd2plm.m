@@ -25,7 +25,8 @@ function varargout=rnd2plm(lmcosi,meth)
 % EXAMPLE: 
 %
 % rnd2plm('demo1')
-% produces realizations of fields with the same statistics as lunar topography
+% produces realizations of fields with the same
+% statistics as lunar topography
 %
 % Written by Kevin Lewis, 02/21/2010
 % Last modified by fjsimons-at-alum.mit.edu, 10/15/2023
@@ -85,7 +86,7 @@ elseif strcmp(lmcosi,'demo1')
   [ah,ha]=krijetem(subnum(3,2));
   
   axes(ah(1))
-  [topo,b,c]=plotplm(lmcosi,[],[],1,1); %delete([b c])
+  [topo,b,c]=plotplm(lmcosi,[],[],4,1); delete([b c])
   % Color scale
   col1=getpos(ah(1));
   col1=[col1(1)-col1(3)/10 col1(2) col1(3)/15 col1(4)];
@@ -110,7 +111,7 @@ elseif strcmp(lmcosi,'demo1')
   wot=1;
   % Check the normalization of GLM2LMCOSI
   lmcosit=glm2lmcosi(G,wot);
-  [taper,b,c]=plotplm(lmcosit,[],[],1,1); %delete([b c])
+  [taper,b,c]=plotplm(lmcosit,[],[],4,1); delete([b c])
   
   [st,lt]=plm2spec(lmcosit);
   axes(ah(6))
@@ -118,15 +119,14 @@ elseif strcmp(lmcosi,'demo1')
 
   % No point in generating more global examples as the global power
   % spectrum is always identical 
-  for inde=1:25
+  for inde=1:2
     % Generate random topographies just like the moon
     lmcosip=rnd2plm(lmcosi);
     topop=plm2xyz(lmcosip,1);
   
     % Plot examples in the space domain
     axes(ah(3))
-    cla(ah(3))
-    [~,b,c]=plotplm(topop,[],[],1,1); %delete([b c])
+    [~,b,c]=plotplm(topop,[],[],4,1); delete([b c])
     
     [lon2,lat2]=caploc([phi0 90-th0],TH,[]);
     hold on; d=plot(lon2,lat2,'k'); hold off
@@ -149,7 +149,7 @@ elseif strcmp(lmcosi,'demo1')
     end
     SMTl=Sal/sum(V(1:onde));
     axes(ah(4))
-    p(2+inde)=plot(0:L,SMTl,'b-o'); axis tight
+    p(2+inde)=plot(0:L,SMTl,'b-o'); axis tight; set(gca,'yscale','log')
     hold on
     
     drawnow
@@ -173,21 +173,18 @@ elseif strcmp(lmcosi,'demo1')
   hold on
   plot(l,ESMTl,'k-','LineW',2)
   
-  keyboard
-  
   % Figure cosmetics
   fig2print(gcf,'tall')
   tits={sprintf('lunar topography to degree %i',L),...
 	'power spectrum',...
-	sprintf('randomized lunar topography %i',L)...
-	,'power spectrum'};
-  xes={'longitude','spherical harmonic degree',...
-       'longitude','spherical harmonic degree'};
-  yes={'latitude','spectral density (dB)',...
-       'latitude','spectral density (dB)'};
+	sprintf('randomized lunar topography %i',L),...
+	'power spectrum',...
+        'Slepian taper','power spectrum'};
+  xes={'longitude','spherical harmonic degree'};
+  yes={'latitude','spectral density (dB)'};
   for in=1:length(ah)
-    axes(ah(in))
-    title(tits{in}); xlabel(xes{in}); ylabel(yes{in})
+      axes(ah(in))
+    title(tits{in}); xlabel(xes{~mod(in,2)+1}); ylabel(yes{~mod(in,2)+1})
   end
   longticks(ah)
   set(ha(1:3),'yaxisl','r')
@@ -206,6 +203,4 @@ elseif strcmp(lmcosi,'demo1')
   figna=figdisp([],sprintf('%s_%i',strin,inde),[],1);
   system(sprintf('degs %s.eps',figna));
   system(sprintf('epstopdf %s.eps',figna));
-  
-  keyboard
 end
