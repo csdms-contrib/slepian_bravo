@@ -24,7 +24,7 @@ function varargout=xyz2spl(flatlon,lat,lon,latp,lonp,method,pars)
 %
 % Should also do an example with the competing method
 %
-% Last modified by fjsimons-at-alum.mit.edu, 05/16/2008
+% Last modified by fjsimons-at-alum.mit.edu, 10/21/2023
 
 defval('flatlon',0)
 
@@ -253,5 +253,3 @@ elseif strcmp(flatlon,'demo2')
   movev(cb,0.05); longticks(cb);
   kelicol
 end
-
-
