@@ -36,6 +36,7 @@ function varargout=...
 % N           the Shannon number
 % EL          the degrees in question
 % EM          the orders in question
+% Gar         the Slepian funcations sampled at the measurement points
 % lmcosi      the spherical harmonic expansion from XYZ2PLM
 %
 % EXAMPLE:
@@ -49,7 +50,7 @@ function varargout=...
 % PLM2SLEP, XYZ2SPL, XYZ2PLM
 %
 % Last modified by charig-at-princeton.edu, 05/14/2015
-% Last modified by fjsimons-at-alum.mit.edu, 10/22/2023
+% Last modified by fjsimons-at-alum.mit.edu, 10/23/2023
 
 % Later: modify to do double cap nonrotated, and compliment
 
@@ -127,7 +128,7 @@ if ~isstr(fthph)
 
   if J<Nd
     % Overdetermined problem, construct the least-squares solution using pinv
-    falpha=pinv(Gar')*fthph;
+    falpha=pinv(Gar(1:J,:)')*fthph;
     % Should be well-conditioned, as the eigenvalues are already, i.e. it
     % should be identical to inv(Gar*Gar')*Gar, which it is
     % truncated. Quality should be roughly according to how close G'G
@@ -136,7 +137,7 @@ if ~isstr(fthph)
     error('Think about this')
   end
 
-  if nargout>6
+  if nargout>7
     % Test this... for fun, not it ends up with 'irr' on the inside
     disp('I am doing it also in spherical harmonics!')
     lmcosi=xyz2plm(fthph,max(L),[],90-theta*180/pi,phi*180/pi);
@@ -149,7 +150,7 @@ if ~isstr(fthph)
   defval('lmcosi',NaN);
   
   % Prepare output
-  vars={falpha,N,V,Glma,EL,EM,lmcosi};
+  vars={falpha,N,V,Glma,EL,EM,Gar(1:J,:),lmcosi};
   varargout=vars(1:nargout);
 elseif strcmp(fthph,'demo1')
   defval('theta',[])
@@ -432,11 +433,6 @@ set(gca,'xtick',phi0+[-2*TH -TH 0 TH 2*TH],...
 grid on
 hold off
 drawnow
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function data=setnans(data)
-data(abs(data)<max(abs(data(:)))/1000)=NaN;
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function testreport(falpha,Gar,fthph)
