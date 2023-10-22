@@ -124,7 +124,7 @@ if ~isstr(fthph)
     end
   end
   Nd=length(theta(:));
-  
+
   if J<Nd
     % Overdetermined problem, construct the least-squares solution using pinv
     falpha=pinv(Gar')*fthph;
@@ -137,9 +137,9 @@ if ~isstr(fthph)
   end
 
   if nargout>6
-    % Test this... for fun
+    % Test this... for fun, not it ends up with 'irr' on the inside
     disp('I am doing it also in spherical harmonics!')
-    lmcosi=xyz2plm(fthph,L,[],90-theta*180/pi,phi*180/pi);
+    lmcosi=xyz2plm(fthph,max(L),[],90-theta*180/pi,phi*180/pi);
   end
   
   % Initialize variables that could have ended empty
