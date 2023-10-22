@@ -24,7 +24,7 @@ function varargout=slep2plm(falpha,TH,L,phi,theta,omega)
 %
 % See also: PTOSLEP, GLMALPHA, GLMALPHAPTO
 %
-% Last modified by fjsimons-at-alum.mit.edu, 11/09/2016
+% Last modified by fjsimons-at-alum.mit.edu, 10/21/2023
 
 % Supply defaults
 defval('TH',30)
