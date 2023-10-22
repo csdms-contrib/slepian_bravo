@@ -49,7 +49,7 @@ function varargout=...
 % PLM2SLEP, XYZ2SPL, XYZ2PLM
 %
 % Last modified by charig-at-princeton.edu, 05/14/2015
-% Last modified by fjsimons-at-alum.mit.edu, 10/21/2023
+% Last modified by fjsimons-at-alum.mit.edu, 10/22/2023
 
 % Later: modify to do double cap nonrotated, and compliment
 
@@ -72,31 +72,39 @@ if ~isstr(fthph)
   if ~all(size(theta(:))==size(phi(:)))
     error('Input arrays must have the same dimensions for irregular grids')
   end
-  % Compute the Shannon number for the relevant situation
-  N=round((L+1)^2*spharea(TH,sord));
+
+  % Make a default Shannon number to default to the number of functions
+  lp=length(L)==1; bp=length(L)==2; ldim=(L(2-lp)+1)^2-bp*L(1)^2;
+  eN=ldim*(1-cos(TH/180*pi))/2;
+  % This used to be simple below but that's not for applicable bandlimited
+  % eN=round((L+1)^2*spharea(TH,sord));
+  % Compute the Shannon number for the relevant situation unless you have it
+  defval('N',eN)
   % And equate the truncation level to the Shannon number unless
   % otherwise indicated  
   defval('J',round(N))
 
   if sord==1
+      % If you have not supplied Glma you need to compute it
       if exist('Glma')~=1 ||  exist('V')~=1 ||  exist('N')~=1 ...
-	|| exist('EL')~=1 ||  exist('EM')~=1
-	if phi0~=0 || theta0~=0 || omega~=0
-	  % (Rotated) single cap
-	  [Gar,V,N,J,phi0,theta0,omega,theta,phi,TH,L,Glma,EL,EM]=...
-	      galphapto(TH,L,phi0,theta0,omega,theta,phi,J,1);
-	else
-	  % (Non-Rotated) single cap
-	  [Gar,V,EM,GK,VK,NA,N,theta,phi,Glma,EL]=...
-	      galpha(TH,L,1,theta,phi,'global',0,0,0,J,1);
-	end
+	      || exist('EL')~=1 ||  exist('EM')~=1
+	  if phi0~=0 || theta0~=0 || omega~=0
+	      % (Rotated) single cap
+	      [Gar,V,N,J,phi0,theta0,omega,theta,phi,TH,L,Glma,EL,EM]=...
+	          galphapto(TH,L,phi0,theta0,omega,theta,phi,J,1);
+	  else
+	      % (Non-Rotated) single cap
+	      [Gar,V,EM,GK,VK,NA,N,theta,phi,Glma,EL]=...
+	          galpha(TH,L,1,theta,phi,'global',0,0,0,J,1);
+	  end
       else
-	if phi0~=0 || theta0~=0 || omega~=0
-	  Gar=galphapto(TH,L,phi0,theta0,omega,theta,phi,J,1,Glma,V,N,EL,EM);
-	else
-	  Gar=galpha(TH,L,1,theta,phi,'global',0,0,0,J,1,Glma,V,N,EL,EM);
-	end
-	end
+      % If you've supplied Glma you won't recompute, just evaluate
+	  if phi0~=0 || theta0~=0 || omega~=0
+	      Gar=galphapto(TH,L,phi0,theta0,omega,theta,phi,J,1,Glma,V,N,EL,EM);
+	  else
+	      Gar=galpha(TH,L,1,theta,phi,'global',0,0,0,J,1,Glma,V,N,EL,EM);
+	  end
+        end
   elseif sord==3
     meths='new';
     switch meths
@@ -143,7 +151,6 @@ if ~isstr(fthph)
   % Prepare output
   vars={falpha,N,V,Glma,EL,EM,lmcosi};
   varargout=vars(1:nargout);
-  
 elseif strcmp(fthph,'demo1')
   defval('theta',[])
   defval('Nd',theta);
