@@ -9,22 +9,22 @@ function varargout=...
 %
 % INPUT:
 %
-% fthph       function values defined on the array theta,phi
-% theta       colatitude vector (0 <= theta <= pi) [radians]
-% phi         longitude vector (0 <= theta <= 2*pi) [radians]
-% TH          the radius of the single cap Slepian function
-% L           the bandlimit of the Slepian function, or the passband
-% phi0        the longitude of the center of the cap [degrees] 
-% theta0      the latitude of the center of the cap [degrees]
-% omega       the rotation around the cap center [degrees]
-% J           the truncation number in the expansion [default: N]
+% fthph       Function values defined on the array theta, phi
+% theta       Colatitude vector (0 <= theta <= pi) [radians]
+% phi         Longitude vector (0 <= phi <= 2*pi) [radians]
+% TH          Radius of the single cap Slepian function
+% L           Bandlimit of the Slepian function, or the passband
+% phi0        Longitude of the center of the cap [degrees] 
+% theta0      Latitude of the center of the cap [degrees]
+% omega       Rotation around the cap center [degrees]
+% J           Truncation number in the expansion [default: N]
 % sord        1 Single cap of diameter 2TH [default]
 %             3 Equatorial belt of width 2TH
-% Glma        The spectral eigenfunctions in case you already have them
-% V           The spectral eigenvalues in case you already have them
-% N           The Shannon number in case you already have it
-% EL          The degrees in question if you already have them
-% EM          The orders in question if you already have them
+% Glma        Spectral eigenfunctions in case you already have them
+% V           Spectral eigenvalues in case you already have them
+% N           Shannon number in case you already have it
+% EL          Degrees in question if you already have them
+% EM          Orders in question if you already have them
 %
 % OUTPUT:
 %
