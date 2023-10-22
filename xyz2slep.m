@@ -48,8 +48,8 @@ function varargout=...
 %
 % PLM2SLEP, XYZ2SPL, XYZ2PLM
 %
-% Last modified by fjsimons-at-alum.mit.edu, 01/17/2010
 % Last modified by charig-at-princeton.edu, 05/14/2015
+% Last modified by fjsimons-at-alum.mit.edu, 10/21/2023
 
 % Later: modify to do double cap nonrotated, and compliment
 
