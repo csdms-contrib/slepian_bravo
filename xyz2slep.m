@@ -36,7 +36,7 @@ function varargout=...
 % N           the Shannon number
 % EL          the degrees in question
 % EM          the orders in question
-% Gar         the Slepian funcations sampled at the measurement points
+% Gar         the Slepian functions sampled at the measurement points
 % lmcosi      the spherical harmonic expansion from XYZ2PLM
 %
 % EXAMPLE:
@@ -99,13 +99,13 @@ if ~isstr(fthph)
 	          galpha(TH,L,1,theta,phi,'global',0,0,0,J,1);
 	  end
       else
-      % If you've supplied Glma you won't recompute, just evaluate
+          % If you've supplied Glma you won't recompute, just evaluate
 	  if phi0~=0 || theta0~=0 || omega~=0
 	      Gar=galphapto(TH,L,phi0,theta0,omega,theta,phi,J,1,Glma,V,N,EL,EM);
 	  else
 	      Gar=galpha(TH,L,1,theta,phi,'global',0,0,0,J,1,Glma,V,N,EL,EM);
 	  end
-        end
+      end
   elseif sord==3
     meths='new';
     switch meths
