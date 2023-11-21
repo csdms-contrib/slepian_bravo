@@ -50,7 +50,7 @@ function varargout=...
 % PLM2SLEP, XYZ2SPL, XYZ2PLM
 %
 % Last modified by charig-at-princeton.edu, 05/14/2015
-% Last modified by fjsimons-at-alum.mit.edu, 10/23/2023
+% Last modified by fjsimons-at-alum.mit.edu, 11/20/2023
 
 % Later: modify to do double cap nonrotated, and compliment
 
@@ -75,7 +75,9 @@ if ~isstr(fthph)
   end
 
   % Make a default Shannon number to default to the number of functions
-  lp=length(L)==1; bp=length(L)==2; ldim=(L(2-lp)+1)^2-bp*L(1)^2;
+  lp=length(L)==1;
+  bp=length(L)==2;
+  ldim=(L(2-lp)+1)^2-bp*L(1)^2;
   eN=ldim*(1-cos(TH/180*pi))/2;
   % This used to be simple below but that's not for applicable bandlimited
   % eN=round((L+1)^2*spharea(TH,sord));
@@ -139,8 +141,8 @@ if ~isstr(fthph)
 
   if nargout>7
     % Test this... for fun, not it ends up with 'irr' on the inside
-    disp('I am doing it also in spherical harmonics!')
-    lmcosi=xyz2plm(fthph,max(L),[],90-theta*180/pi,phi*180/pi);
+      disp('I am doing it also in spherical harmonics!')
+      lmcosi=xyz2plm(fthph,L,[],90-theta*180/pi,phi*180/pi);
   end
   
   % Initialize variables that could have ended empty
