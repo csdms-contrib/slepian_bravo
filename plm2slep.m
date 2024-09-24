@@ -40,13 +40,13 @@ function varargout=plm2slep(lmcosi,TH,L,phi,theta,omega,nosort,J)
 %
 % See also: PTOSLEP, GLMALPHA, GLMALPHAPTO, SLEP2PLM
 %
-% Last modified by charig-at-princeton.edu, 4/24/2013
+% Last modified by charig-at-princeton.edu, 9/24/2024
 % Last modified by fjsimons-at-alum.mit.edu, 9/26/2023
 
 if ~isstr(lmcosi)
   % Supply defaults
   defval('TH',30)
-  defval('L',18)
+  defval('L',max(lmcosi(:,1)))
   defval('phi',0)
   defval('theta',0)
   defval('omega',0)
